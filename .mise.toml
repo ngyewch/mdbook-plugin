@@ -1,0 +1,5 @@
+[tools]
+go = "1.23.3"
+task = "3.40.0"
+act = "0.2.69"
+"go:github.com/psampaz/go-mod-outdated" = "0.9.0"

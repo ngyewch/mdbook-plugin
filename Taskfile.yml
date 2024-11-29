@@ -1,0 +1,26 @@
+version: 3
+
+tasks:
+  preBuild:
+    desc: Pre-build
+    cmds:
+      - go mod download
+      - go mod tidy
+
+  build:
+    desc: Build
+    deps: [ preBuild ]
+    cmds:
+      - go build ./...
+
+  test:
+    desc: Test
+    deps: [ preBuild ]
+    cmds:
+      - go test ./...
+      
+  dependencyUpdates:
+    desc: Show dependency updates
+    deps: [ preBuild ]
+    cmds:
+      - go list -u -m -json all | go-mod-outdated -update -direct
