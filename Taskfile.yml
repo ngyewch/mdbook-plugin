@@ -24,3 +24,8 @@ tasks:
     deps: [ preBuild ]
     cmds:
       - go list -u -m -json all | go-mod-outdated -update -direct
+
+  mingo:
+    cmds:
+      - mise exec go@1.24.3 -- mise install 'go:github.com/bobg/mingo/cmd/mingo@0.13.0'
+      - mise exec 'go:github.com/bobg/mingo/cmd/mingo@0.13.0' -- mingo -tests -v
