@@ -1,5 +1,5 @@
 module github.com/ngyewch/mdbook-plugin
 
-go 1.23
+go 1.22
 
-require github.com/yuin/goldmark v1.7.8
+require github.com/yuin/goldmark v1.7.11
