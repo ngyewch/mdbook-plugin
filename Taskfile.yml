@@ -18,7 +18,7 @@ tasks:
     deps: [ preBuild ]
     cmds:
       - go test ./...
-      
+
   dependencyUpdates:
     desc: Show dependency updates
     deps: [ preBuild ]
