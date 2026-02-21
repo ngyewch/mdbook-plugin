@@ -16,7 +16,17 @@ type RenderContext struct {
 }
 
 type Book struct {
+	// deprecated: since v0.5.0 of mdbook, Sections field is deprecated in favor of Items
 	Sections []*BookItem `json:"sections"`
+	Items    []*BookItem `json:"items"`
+}
+
+// GetItems returns the list of book items
+func (b *Book) GetItems() []*BookItem {
+	if len(b.Items) > 0 {
+		return b.Items
+	}
+	return b.Sections
 }
 
 type BookItem struct {
@@ -41,27 +51,29 @@ type Separator struct {
 type PartTitle string
 
 type Config struct {
-	Book   *BookConfig            `json:"book,omitempty"`
-	Build  *BuildConfig           `json:"build,omitempty"`
-	Rust   *RustConfig            `json:"rust,omitempty"`
-	Output map[string]interface{} `json:"output,omitempty"`
+	Book         *BookConfig    `json:"book,omitempty"`
+	Build        *BuildConfig   `json:"build,omitempty"`
+	Rust         *RustConfig    `json:"rust,omitempty"`
+	Output       map[string]any `json:"output,omitempty"`
+	Preprocessor map[string]any `json:"preprocessor,omitempty"`
 }
 
 type BookConfig struct {
-	Title         string   `json:"title,omitempty"`
-	Authors       []string `json:"authors,omitempty"`
-	Description   string   `json:"description,omitempty"`
-	Src           string   `json:"src"`
-	Multilingual  bool     `json:"multilingual"`
-	Language      string   `json:"language,omitempty"`
-	TextDirection string   `json:"text_direction,omitempty"`
+	Title       string   `json:"title,omitempty"`
+	Authors     []string `json:"authors,omitempty"`
+	Description string   `json:"description,omitempty"`
+	Src         string   `json:"src"`
+	// deprecated: since v0.5.0 of mdbook, Multilingual field has been removed
+	Multilingual  bool   `json:"multilingual,omitempty"`
+	Language      string `json:"language,omitempty"`
+	TextDirection string `json:"text-direction,omitempty"`
 }
 
 type BuildConfig struct {
-	BuildDir                string   `json:"build_dir,omitempty"`
-	CreateMissing           bool     `json:"create_missing"`
-	UseDefaultPreprocessors bool     `json:"use_default_preprocessors"`
-	ExtraWatchDirs          []string `json:"extra_watch_dirs,omitempty"`
+	BuildDir                string   `json:"build-dir,omitempty"`
+	CreateMissing           bool     `json:"create-missing"`
+	UseDefaultPreprocessors bool     `json:"use-default-preprocessors"`
+	ExtraWatchDirs          []string `json:"extra-watch-dirs,omitempty"`
 }
 
 type RustConfig struct {

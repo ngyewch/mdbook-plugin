@@ -39,9 +39,8 @@ func Process(renderContext *RenderContext, handler Handler) error {
 }
 
 func (p *Processor) Process() error {
-	for _, section := range p.renderContext.Book.Sections {
-		err := p.handleBookItem(section)
-		if err != nil {
+	for _, item := range p.renderContext.Book.GetItems() {
+		if err := p.handleBookItem(item); err != nil {
 			return err
 		}
 	}
